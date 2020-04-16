@@ -50,22 +50,30 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
         payAmount = Integer.parseInt(amt);
 
         Checkout checkout = new Checkout();
-        checkout.setImage(R.mipmap.ic_launcher);
+        //checkout.setImage(R.mipmap.ic_launcher);
 
         final Activity activity = this;
 
         try {
             JSONObject options = new JSONObject();
-            options.put("name", "Vignesh");
+            options.put("name", "Razor Pay");
             options.put("description", "Product Charges");
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("currency", "INR");
             options.put("amount", payAmount*100);
+
+            JSONObject preFill = new JSONObject();
+            preFill.put("email", "mail_id");
+            preFill.put("contact", "contact_number");
+            options.put("prefill", preFill);
+
             checkout.open(activity,options);
 
         }catch (Exception e){
+
             Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
         }
     }
 
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
 
         String s = razorpayPaymentID;
         try {
-            Toast.makeText(this, "Payment Successful: " + s, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Payment Successful: " + razorpayPaymentID, Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             Log.e(TAG, "Exception in onPaymentSuccess", e);
         }
