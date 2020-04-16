@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements PaymentResultList
         payAmount = Integer.parseInt(amt);
 
         Checkout checkout = new Checkout();
-        //checkout.setImage(R.mipmap.ic_launcher);
+        checkout.setImage(R.mipmap.ic_launcher);
 
         final Activity activity = this;
 
